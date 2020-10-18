@@ -48,6 +48,14 @@ export default defineComponent({
     animate: {
       default: false,
       type: Boolean
+    },
+    swipeable: {
+      default: false,
+      type: Boolean
+    },
+    threshold: {
+      default: 50,
+      type: Number
     }
   },
   emits: ['update:modelValue'],
@@ -114,11 +122,13 @@ export default defineComponent({
       }
     }
     function onMoveStart(event: MouseEvent | TouchEvent) {
-      state.start = true;
-      const position = getPosition(event);
-      if(!position) return;
-      state.startPosition.x = position.x;
-      state.startPosition.y = position.y;
+      if(props.swipeable) {
+        state.start = true;
+        const position = getPosition(event);
+        if(!position) return;
+        state.startPosition.x = position.x;
+        state.startPosition.y = position.y;
+      }
     }
     function onMoveEnd(event: MouseEvent | TouchEvent) {
       if(state.start) {
@@ -127,12 +137,12 @@ export default defineComponent({
         if(!position) return;
         const selectedIndex = state.tabPanelOptions.findIndex(option => option.value === props.modelValue);
         const dx = state.startPosition.x - position.x;
-        if(dx < 0) {
+        if(dx < -props.threshold) {
           if(selectedIndex > 0) {
             const tabPanelOption = state.tabPanelOptions[selectedIndex - 1];
             activateTab(tabPanelOption.value);
           }
-        } else {
+        } else if(dx > props.threshold) {
           if(selectedIndex < state.tabPanelOptions.length - 1 ) {
             const tabPanelOption = state.tabPanelOptions[selectedIndex + 1];
             activateTab(tabPanelOption.value);
@@ -154,7 +164,6 @@ export default defineComponent({
 .tab-panels {
   white-space: nowrap;
   overflow: hidden;
-  cursor: pointer;
 }
 .hide-scrollbar::-webkit-scrollbar {
   display: none;

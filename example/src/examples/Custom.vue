@@ -17,6 +17,8 @@
   <tab-panels
     v-model="selectedTab"
     :animate="true"
+    :swipeable="true"
+    class="tab-panels"
   >
     <tab-panel
       v-for="(tab, i) in tabs"
@@ -79,6 +81,11 @@ export default defineComponent({
   border-width: 0px;
   border-top-width: 2px;
   border-style: solid;
+}
+/* disable select highlight */
+.tab-panels {
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }
 .tab-panel {
   padding: 20px;

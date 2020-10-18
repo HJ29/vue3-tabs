@@ -15,6 +15,7 @@
   <tab-panels
     v-model="selectedTab"
     :animate="true"
+    :swipeable="true"
   >
     <tab-panel
       v-for="(tab, i) in tabs"
