@@ -1,15 +1,19 @@
 <template>
-  <example></example>
+  <basic />
+  <div class="separator" />
+  <custom />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Example from './examples/Example.vue'
+import Basic from './examples/Basic.vue';
+import Custom from './examples/Custom.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    Example,
+    Basic,
+    Custom,
   },
 });
 </script>
@@ -21,6 +25,11 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+.separator {
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightgray;
+  margin: 10px 0px;
 }
 </style>

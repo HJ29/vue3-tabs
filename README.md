@@ -1,11 +1,11 @@
-# vue3-plugin-boilerplate
+# vue3-tabs
 
-Vue 3 plugin boilerplate.
+A touch swipe tab for vue 3.
 
 ### Demo
-[Demo](https://hj29.github.io/vue3-plugin/)
+[Demo](https://hj29.github.io/vue3-tabs/)
 
-[Demo Code](https://github.com/HJ29/vue3-plugin/tree/master/example/src/)
+[Demo Code](https://github.com/HJ29/vue3-tabs/tree/master/example/src/)
 
 ## Project setup
 ```

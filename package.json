@@ -1,23 +1,23 @@
 {
-  "name": "vue3-plugin",
+  "name": "vue3-tabs",
   "version": "0.0.1",
   "private": false,
-  "description": "Vue 3 plugin boilerplate.",
+  "description": "A touch swipe tab plugin for vue 3.",
   "author": "hj <hjian5567@gmail.com>",
-  "main": "./dist/vue3-plugin.common.js",
+  "main": "./dist/vue3-tabs.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
-    "build": "vue-cli-service build --target lib --name vue3-plugin ./src/main.ts",
+    "build": "vue-cli-service build --target lib --name vue3-tabs ./src/main.ts",
     "publish": "npm publish --access public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/HJ29/vue3-plugin.git"
+    "url": "https://github.com/HJ29/vue3-tabs.git"
   },
   "files": [
     "src",
-    "dist/vue3-plugin.common.js"
+    "dist/vue3-tabs.common.js"
   ],
   "license": "MIT",
   "peerDependencies": {
@@ -25,11 +25,14 @@
     "vue": "^3.0.0-0"
   },
   "keywords": [
-    "vue3-plugin-boilerplate",
+    "vue3-tabs",
     "Vue",
     "Vue3",
     "plugin",
-    "boilerplate"
+    "tabs",
+    "tab",
+    "swipe tab",
+    "slide tab"
   ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.33.0",
@@ -42,6 +45,8 @@
     "@vue/eslint-config-typescript": "^5.0.2",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0-0",
-    "typescript": "~3.9.3"
+    "typescript": "~3.9.3",
+    "vue": "^3.0.0-0",
+    "core-js": "^3.6.5"
   }
 }

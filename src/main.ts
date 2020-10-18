@@ -1,10 +1,16 @@
 import { App, Plugin } from 'vue';
-import CustomPlugin from './Plugin.vue'
+import Tabs from './Tabs.vue';
+import Tab from './Tab.vue';
+import TabPanel from './TabPanel.vue';
+import TabPanels from './TabPanels.vue';
 
 const install = (app: App) => {
-  app.component('plugin', Plugin)
-}
+  app.component('Tabs', Tabs);
+  app.component('Tab', Tab);
+  app.component('TabPanels', TabPanels);
+  app.component('TabPanel', TabPanel);
+};
 
-CustomPlugin.install = install;
+Tabs.install = install;
 
-export default CustomPlugin as unknown as Plugin;
+export default Tabs as unknown as Plugin;

@@ -1,0 +1,1 @@
+export type Active = string | number | null;
