@@ -13,4 +13,6 @@ const install = (app: App) => {
 
 Tabs.install = install;
 
+export { Tabs, Tab, TabPanels, TabPanel };
+
 export default Tabs as unknown as Plugin;

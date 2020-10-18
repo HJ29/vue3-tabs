@@ -4,7 +4,6 @@
     v-model="selectedTab"
   >
     <tab
-      class="tab"
       v-for="(tab, i) in tabs"
       :key="`t${i}`"
       :val="tab"
@@ -45,9 +44,3 @@ export default defineComponent({
   }
 });
 </script>
-
-<style scoped>
-.tab {
-  padding: 10px 20px;
-}
-</style>

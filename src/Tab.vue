@@ -1,11 +1,12 @@
 <template>
   <div
-    class="tab"
     :class="{'active': isActive && indicator}"
     @click="onClickTab"
   >
     <slot>
-      {{ label }}
+      <div class="tab">
+        {{ label }}
+      </div>
     </slot>
   </div>
 </template>
@@ -57,6 +58,7 @@ export default defineComponent({
 
 <style scoped>
 .tab {
+  padding: 10px 20px;
 }
 .active {
   border-width: 0px;

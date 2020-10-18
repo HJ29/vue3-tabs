@@ -24,6 +24,20 @@ app.use(Tabs);
 app.mount('#app')
 ```
 
+### Register Local Component
+```js
+import { Tabs, Tab, TabPanels, TabPanel } from 'vue3-tabs';
+
+export default {
+  components: {
+    Tabs,
+    Tab,
+    TabPanels,
+    TabPanel
+  },
+};
+```
+
 ### Example
 ```vue
 <template>
@@ -81,47 +95,47 @@ export default defineComponent({
 ```
 
 ### Components
-####Tabs
-#####Props
+#### Tabs
+##### Props
 | Name                    | Type                     | Required | Default | Notes      |
 | ----------------------- | ------------------------ | -------- | ------- | ---------- |
 | :model-value \| v-model | string \| number \| null | yes      | null    | value emit |
-#####Events
+##### Events
 | Name               | Description                |
 | ------------------ | -------------------------- |
 | @update:modelValue | event emit when tab change |
-#####Slots
+##### Slots
 | Name           | Tag      | Description          |
 | -------------- | -------- | -------------------- |
 | v-slot:default | \<tab /> | \<tab /> as children |
 
-####Tab
-#####Props
+#### Tab
+##### Props
 | Name       | Type             | Required | Default | Notes                         |
 | ---------- | ---------------- | -------- | ------- | ----------------------------- |
 | :val       | string \| number | yes      | null    | value to indicate active      |
 | :label     | string           | no       | null    | label                         |
 | :indicator | boolean          | no       | false   | show default active indicator |
 
-####TabPanels
-#####Props
+#### TabPanels
+##### Props
 | Name                    | Type                     | Required | Default | Notes                                                                   |
 | ----------------------- | ------------------------ | -------- | ------- | ----------------------------------------------------------------------- |
 | :model-value \| v-model | string \| number \| null | yes      | null    | value emit                                                              |
 | :animate                | boolean                  | no       | false   | smooth change effect<br>not working with ios                            |
 | :swipeable              | boolean                  | no       | false   | swipe to change tab                                                     |
 | :threshold              | number                   | no       | 50      | minimum pixel to swipe to change tab<br>only work when swipeable = true |
-#####Events
+##### Events
 | Name               | Description                |
 | ------------------ | -------------------------- |
 | @update:modelValue | event emit when tab change |
-#####Slots
+##### Slots
 | Name           | Tag            | Description                |
 | -------------- | -------------- | -------------------------- |
 | v-slot:default | \<tab-panel /> | \<tab-panel /> as children |
 
-####TabPanel
-#####Props
+#### TabPanel
+##### Props
 | Name | Type             | Required | Default | Notes                    |
 | ---- | ---------------- | -------- | ------- | ------------------------ |
 | :val | string \| number | yes      | null    | value to indicate active |

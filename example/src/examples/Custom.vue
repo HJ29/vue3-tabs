@@ -4,14 +4,17 @@
     v-model="selectedTab"
   >
     <tab
-      class="tab"
       v-for="(tab, i) in tabs"
       :key="`t${i}`"
       :val="tab.value"
-      :style="{'border-color': getActive(tab.value) ? tab.color : '', color: getActive(tab.value) ? tab.color : ''}"
-      :class="{'active-tab': getActive(tab.value)}"
     >
-      {{ tab.label }}
+      <div
+        :style="{'border-color': getActive(tab.value) ? tab.color : '', color: getActive(tab.value) ? tab.color : ''}"
+        :class="{'active-tab': getActive(tab.value)}"
+        class="tab"
+      >
+        {{ tab.label }}
+      </div>
     </tab>
   </tabs>
   <tab-panels
