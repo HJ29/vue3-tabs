@@ -5,6 +5,7 @@
   "description": "A touch swipe tab plugin for vue 3.",
   "author": "hj <hjian5567@gmail.com>",
   "main": "./dist/vue3-tabs.common.js",
+  "unpkg": "/dist/vue3-tabs.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
