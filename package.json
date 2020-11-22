@@ -16,8 +16,7 @@
     "url": "https://github.com/HJ29/vue3-tabs.git"
   },
   "files": [
-    "src",
-    "dist/vue3-tabs.common.js"
+    "dist"
   ],
   "license": "MIT",
   "peerDependencies": {

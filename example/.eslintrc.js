@@ -21,5 +21,8 @@ module.exports = {
     "indent": ["error", 2],
     "no-trailing-spaces": "error",
     "object-curly-spacing": ["error", "always"]
-  }
+  },
+  overrides: [{
+    files: ["**/dist/*.js"]
+  }]
 }
