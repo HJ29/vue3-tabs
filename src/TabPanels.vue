@@ -88,7 +88,13 @@ export default defineComponent({
     }
     function getTabPanelOptions() {
       if(slots.default && state.tabPanelsRef) {
-        const vnodes = slots.default()[0].children as VNode[];
+        let vnodes: VNode[] = [];
+        const children = slots.default() || [];
+        if((children[0]?.type as any)?.name === 'TabPanel') {
+          vnodes = children;
+        } else {
+          vnodes = children[0].children as VNode[];
+        }
         const tabPanelsRef = state.tabPanelsRef;
         let left = 0;
         state.tabPanelOptions = vnodes.map((vnode, i) => {
