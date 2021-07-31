@@ -98,9 +98,9 @@ export default defineComponent({
         const tabPanelsRef = state.tabPanelsRef;
         let left = 0;
         state.tabPanelOptions = vnodes.map((vnode, i) => {
-          const position = tabPanelsRef.children[i].getBoundingClientRect();
+          const position = tabPanelsRef.children[i]?.getBoundingClientRect();
           const currentLeft = left;
-          left += position.width;
+          left += position?.width || 0;
           return {
             left: currentLeft,
             value: vnode.props != undefined ? vnode.props.val : undefined
