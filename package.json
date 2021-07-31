@@ -1,6 +1,6 @@
 {
   "name": "vue3-tabs",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "private": false,
   "description": "A touch swipe tab plugin for vue 3.",
   "author": "hj <hjian5567@gmail.com>",
