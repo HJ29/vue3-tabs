@@ -13,8 +13,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, VNode, onMounted, onUpdated, watch } from "vue";
+import { defineComponent, reactive, toRefs, VNode, onMounted, onUpdated, watch, onUnmounted } from "vue";
 import { Active } from '.';
+
+function debounce(callback: any, ms = 50) {
+  let timeout: any = null;
+  return function () {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      callback();
+    }, ms);
+  };
+}
 
 export interface TabPanels {
   state: TabPanelsState;
@@ -56,6 +66,10 @@ export default defineComponent({
     threshold: {
       default: 50,
       type: Number
+    },
+    responsive: {
+      default: true,
+      type: Boolean
     }
   },
   emits: ['update:modelValue'],
@@ -72,6 +86,14 @@ export default defineComponent({
     onMounted(() => {
       getTabPanelOptions();
       scrollToModelValue(props.modelValue);
+      if(props.responsive) {
+        window.addEventListener("resize", onWidthChange);
+      }
+    });
+    onUnmounted(() => {
+      if(props.responsive) {
+        window.removeEventListener("resize", onWidthChange);
+      }
     });
     onUpdated(() => {
       getTabPanelOptions();
@@ -80,10 +102,14 @@ export default defineComponent({
     watch(() => props.modelValue, (modelValue) => {
       scrollToModelValue(modelValue);
     }, { immediate: true });
-    function scrollToModelValue(modelValue: string | number | null) {
+    const onWidthChange = debounce(() => {
+      getTabPanelOptions();
+      scrollToModelValue(props.modelValue, false);
+    }, 10);
+    function scrollToModelValue(modelValue: string | number | null, animate = true) {
       const option = state.tabPanelOptions.find(option => option.value === modelValue);
       if(option && state.tabPanelsRef) {
-        state.tabPanelsRef.scrollTo({ left: option.left, behavior: props.animate ? 'smooth' : undefined });
+        state.tabPanelsRef.scrollTo({ left: option.left, behavior: props.animate && animate ? 'smooth' : undefined });
       }
     }
     function getTabPanelOptions() {
@@ -95,14 +121,11 @@ export default defineComponent({
         } else {
           vnodes = children[0].children as VNode[];
         }
-        const tabPanelsRef = state.tabPanelsRef;
-        let left = 0;
+        const size = state.tabPanelsRef?.getBoundingClientRect();
+        const width = size?.width || 0;
         state.tabPanelOptions = vnodes.map((vnode, i) => {
-          const position = tabPanelsRef.children[i]?.getBoundingClientRect();
-          const currentLeft = left;
-          left += position?.width || 0;
           return {
-            left: currentLeft,
+            left: width * i,
             value: vnode.props != undefined ? vnode.props.val : undefined
           };
         });
