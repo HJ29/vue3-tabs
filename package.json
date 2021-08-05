@@ -10,7 +10,7 @@
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "build": "vue-cli-service build --target lib --name vue3-tabs ./src/main.ts",
-    "publish": "npm publish --access public"
+    "publish": "yarn build && npm publish --access public"
   },
   "repository": {
     "type": "git",
