@@ -74,7 +74,7 @@ export default defineComponent({
       type: Boolean
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'on-animation-end'],
   setup(props, { emit, slots }) {
     const state: TabPanelsState = reactive({
       tabPanelsRef: null,
@@ -135,6 +135,7 @@ export default defineComponent({
           removeTabPanelRefs.forEach(element => {
             element.remove();
           });
+          emit('on-animation-end', modelValue);
         }));
       }
     }
