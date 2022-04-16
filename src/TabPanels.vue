@@ -7,6 +7,7 @@
     @touchstart="onMoveStart"
     @touchend="onMoveEnd"
     ref="tabPanelsRef"
+    :key="modelValue"
   >
     <slot />
   </div>
@@ -46,6 +47,7 @@ interface TabPanelsState {
   start: boolean;
   tabPanelsRef: Element | null;
   tabPanelOptions: TabPanelOption[];
+  previousModelValue?: string | number;
 }
 
 export default defineComponent({
@@ -81,7 +83,8 @@ export default defineComponent({
         x: 0,
         y: 0
       },
-      tabPanelOptions: []
+      tabPanelOptions: [],
+      previousModelValue: undefined
     });
     onMounted(() => {
       getTabPanelOptions();
@@ -99,17 +102,40 @@ export default defineComponent({
       getTabPanelOptions();
       scrollToModelValue(props.modelValue);
     });
-    watch(() => props.modelValue, (modelValue) => {
+    watch(() => props.modelValue, (modelValue, previousModelValue) => {
+      state.previousModelValue = previousModelValue;
       scrollToModelValue(modelValue);
     }, { immediate: true });
     const onWidthChange = debounce(() => {
       getTabPanelOptions();
       scrollToModelValue(props.modelValue, false);
     }, 10);
+    function checkScrollEnd(element: Element, x: number, callback: Function) {
+      if (!!element && Math.abs(element.scrollLeft - x) > 5) {
+        window.requestAnimationFrame(() => checkScrollEnd(element, x, callback));
+      }
+      else {
+        callback();
+      }
+    }
     function scrollToModelValue(modelValue: string | number | null, animate = true) {
-      const option = state.tabPanelOptions.find(option => option.value === modelValue);
+      const index = state.tabPanelOptions.findIndex(option => option.value === modelValue);
+      const option = state.tabPanelOptions[index];
       if(option && state.tabPanelsRef) {
+        if(state.previousModelValue !== undefined) {
+          const previousOption = state.tabPanelOptions.find(option => option.value === state.previousModelValue);
+          if(previousOption) {
+            state.tabPanelsRef.scrollTo({ left: previousOption.left });
+          }
+        }
         state.tabPanelsRef.scrollTo({ left: option.left, behavior: props.animate && animate ? 'smooth' : undefined });
+        window.requestAnimationFrame(() => checkScrollEnd(state.tabPanelsRef as Element, option.left, () => {
+          const tabPanelRefs = (state.tabPanelsRef?.children || []) as HTMLCollection;
+          const removeTabPanelRefs = [...tabPanelRefs].filter((ref, i) => i !== index);
+          removeTabPanelRefs.forEach(element => {
+            element.remove();
+          });
+        }));
       }
     }
     function getTabPanelOptions() {
