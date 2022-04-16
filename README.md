@@ -126,9 +126,10 @@ export default defineComponent({
 | :swipeable              | boolean                  | no       | false   | swipe to change tab                                                     |
 | :threshold              | number                   | no       | 50      | minimum pixel to swipe to change tab<br>only work when swipeable = true |
 ##### Events
-| Name               | Description                |
-| ------------------ | -------------------------- |
-| @update:modelValue | event emit when tab change |
+| Name               | Description                      |
+| ------------------ | -------------------------------- |
+| @update:modelValue | event emit when tab change       |
+| @on-animation-end  | event emit switch animation end  |
 ##### Slots
 | Name           | Tag            | Description                |
 | -------------- | -------------- | -------------------------- |
